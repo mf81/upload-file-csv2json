@@ -1,4 +1,6 @@
 {
   "tmpDir": "./tmpy",
-  "jsonFile": "./tmpy/data.json"
+  "jsonFile": "./tmpy/data.json",
+  "db": "mongodb://localhost/rss",
+  "PORT": "3000"
 }
