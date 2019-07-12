@@ -1,4 +1,4 @@
 {
-  "tmpDir": "./tmp",
+  "tmpDir": "./tmpy",
   "jsonFile": "./tmpy/data.json"
 }
