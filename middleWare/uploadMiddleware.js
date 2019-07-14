@@ -1,7 +1,8 @@
 const Busboy = require("busboy");
 const fs = require("fs");
 const config = require("config");
-const csv = require("csvtojson/v2");
+
+const csv2json = require("csv2json");
 
 module.exports = (req, res, next) => {
   if (req.method === "POST") {
@@ -11,7 +12,15 @@ module.exports = (req, res, next) => {
         return res.status(500).send("File is not CSV");
 
       const fileToSave = fs.createWriteStream(config.get("jsonFile"));
-      file.pipe(csv({ delimiter: ";" })).pipe(fileToSave);
+      file
+        .pipe(
+          csv2json({
+            separator: ";"
+          })
+        )
+        .pipe(fileToSave);
+      // const fileToSave = fs.createWriteStream(config.get("csvFile"));
+      // file.pipe(fileToSave);
     });
     req.pipe(busboy);
   }

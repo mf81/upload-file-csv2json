@@ -1,6 +1,10 @@
 {
   "tmpDir": "./tmpy",
-  "jsonFile": "./tmpy/data.json",
+  "csvFile": "./tmpy/data.csv",
+  "jsonFile": "./tmpy/data_json.txt",
   "db": "mongodb://localhost/rss",
-  "PORT": "3000"
+  "PORT": "3000",
+
+  "inText": "./tmpy/in.txt",
+  "outText": "./tmpy/out.txt"
 }
