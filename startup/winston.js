@@ -2,7 +2,7 @@ const winston = require("winston");
 require("winston-mongodb");
 const config = require("config");
 
-module.exports = function() {
+module.exports = () => {
   const db = config.get("db");
   const logger = winston.createLogger({
     level: "info",

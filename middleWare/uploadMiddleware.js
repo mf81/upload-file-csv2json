@@ -1,7 +1,6 @@
+const config = require("config");
 const Busboy = require("busboy");
 const fs = require("fs");
-const config = require("config");
-
 const csv2json = require("csv2json");
 
 module.exports = (req, res, next) => {
