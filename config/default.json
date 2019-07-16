@@ -2,7 +2,7 @@
   "tmpDir": "./tmpy",
   "csvFile": "./tmpy/data.csv",
   "jsonFile": "./tmpy/data_json.txt",
-  "db": "mongodb://localhost/rss",
+  "db": "mongodb://localhost/rssDB",
   "PORT": "3000",
 
   "inText": "./tmpy/in.txt",
