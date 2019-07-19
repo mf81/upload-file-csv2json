@@ -3,7 +3,7 @@ const config = require("config");
 const loggerWinston = require("./startup/winston");
 require("express-async-errors");
 const Joi = require("joi");
-Joi.objectId = require("joi-objectid")(Joi);
+//Joi.objectId = require("joi-objectid")(Joi);
 
 const app = express();
 app.use(express.json());
