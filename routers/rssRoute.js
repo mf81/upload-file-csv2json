@@ -21,11 +21,6 @@ router.get("/id/:id", validateObjectId, async (req, res) => {
 });
 
 router.get("/findby", async (req, res) => {
-  //   rss = await Rss.find({
-  //     nr: req.query.nr,
-  //     rok: req.query.rok
-  //   });
-
   rss = await Rss.find({
     $and: [
       {
@@ -40,41 +35,34 @@ router.get("/findby", async (req, res) => {
   res.send(rss);
 });
 
-router.get("/findmf", async (req, res) => {
-  //   rss = await Rss.find({
-  //     nr: req.query.nr,
-  //     rok: req.query.rok
-  //   });
-  console.log(req.query.imienazwisko);
-
-  //   const rss = await Rss.find({
-  //     imieNazwisko: { $regex: /Tadeusz/, $options: "i" }
-  //   });
-  console.log(new RegExp(req.query.imienazwisko));
-  const rss = await Rss.find({
-    imieNazwisko: new RegExp(req.query.imienazwisko, "i")
-  });
-
-  //{$match: { $or: [{ 'imieNazwisko': { $regex:  request.query.imienazwisko, $options: 'i'} }  ] }}
-
-  res.send(rss);
-});
-
 router.get("/findbyjson", async (req, res) => {
-  console.log("nazwisko" + req.body.imieNazwisko);
-  console.log(req.body.adres);
+  let {
+    nr,
+    rok,
+    imieNazwisko,
+    adres,
+    nrDW,
+    rokDW,
+    sygnaturaNakaz,
+    sygnaturaSprzeciw,
+    sygnaturaApelacja
+  } = req.body;
 
-  if (req.body.imieNazwisko) req.body.imieNazwisko + " ";
+  if (imieNazwisko) {
+    const re = new RegExp("(.+)\\s(.+)\\s$");
+    re.test(imieNazwisko) ? (imieNazwisko += " ") : imieNazwisko;
+  }
+
   const findQuery = {
-    nr: req.body.nr,
-    rok: req.body.rok,
-    imieNazwisko: new RegExp(req.body.imieNazwisko, "i"),
-    adres: new RegExp(req.body.adres, "i"),
-    nrDW: req.body.nrDW,
-    rokDW: req.body.rokDW,
-    sygnaturaNakaz: req.body.sygnaturaNakaz,
-    sygnaturaSprzeciw: req.body.sygnaturaSprzeciw,
-    sygnaturaApelacja: req.body.sygnaturaApelacja
+    nr: new RegExp(nr, "i"),
+    rok: new RegExp(rok, "i"),
+    imieNazwisko: new RegExp(imieNazwisko, "i"),
+    adres: new RegExp(adres, "i"),
+    nrDW: new RegExp(nrDW, "i"),
+    rokDW: new RegExp(rokDW, "i"),
+    sygnaturaNakaz: new RegExp(sygnaturaNakaz, "i"),
+    sygnaturaSprzeciw: new RegExp(sygnaturaSprzeciw, "i"),
+    sygnaturaApelacja: new RegExp(sygnaturaApelacja, "i")
   };
 
   rss = await Rss.find(findQuery);
@@ -82,6 +70,3 @@ router.get("/findbyjson", async (req, res) => {
 });
 
 module.exports = router;
-
-//,
-//adres: new RegExp(req.body.adres, "i")
