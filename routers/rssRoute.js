@@ -48,11 +48,6 @@ router.get("/findbyjson", async (req, res) => {
     sygnaturaApelacja
   } = req.body;
 
-  if (imieNazwisko) {
-    const re = new RegExp("(.+)\\s(.+)\\s$");
-    re.test(imieNazwisko) ? (imieNazwisko += " ") : imieNazwisko;
-  }
-
   const findQuery = {
     nr: new RegExp(nr, "i"),
     rok: new RegExp(rok, "i"),
@@ -65,7 +60,7 @@ router.get("/findbyjson", async (req, res) => {
     sygnaturaApelacja: new RegExp(sygnaturaApelacja, "i")
   };
 
-  rss = await Rss.find(findQuery);
+  rss = await Rss.find(findQuery).select("-_id -__v");
   res.send(rss);
 });
 
