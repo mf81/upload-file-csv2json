@@ -36,6 +36,27 @@ router.get("/findby", async (req, res) => {
 });
 
 router.get("/findbyjson", async (req, res) => {
+  // await Rss.find(docRecords(req.body), (err, doc) => {
+  //   const txt = doc.wartosc;
+  //   doc.wartosc = txt.replace(".", "");
+  //   console.log(doc.wartosc);
+  //   doc.save(callback);
+  // });
+
+  const data = await Rss.find(docRecords(req.body)).select("-_id -__v");
+  const count = await Rss.find(docRecords(req.body)).countDocuments();
+
+  const metaData = {
+    countCases: new String(count),
+    data
+  };
+
+  //console.log(JSON.stringify(metaData, 1, 1));
+
+  res.send(JSON.stringify(metaData, 2, 1));
+});
+
+function docRecords(body) {
   let {
     nr,
     rok,
@@ -46,9 +67,9 @@ router.get("/findbyjson", async (req, res) => {
     sygnaturaNakaz,
     sygnaturaSprzeciw,
     sygnaturaApelacja
-  } = req.body;
+  } = body;
 
-  const findQuery = {
+  return {
     nr: new RegExp(nr, "i"),
     rok: new RegExp(rok, "i"),
     imieNazwisko: new RegExp(imieNazwisko, "i"),
@@ -59,9 +80,6 @@ router.get("/findbyjson", async (req, res) => {
     sygnaturaSprzeciw: new RegExp(sygnaturaSprzeciw, "i"),
     sygnaturaApelacja: new RegExp(sygnaturaApelacja, "i")
   };
-
-  rss = await Rss.find(findQuery).select("-_id -__v");
-  res.send(rss);
-});
+}
 
 module.exports = router;
