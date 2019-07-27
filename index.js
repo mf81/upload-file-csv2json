@@ -8,6 +8,7 @@ const Joi = require("joi");
 const app = express();
 app.use(express.json());
 
+require("./startup/jwt")();
 require("./startup/db")();
 require("./startup/routers")(app);
 require("./startup/production")(app);

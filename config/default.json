@@ -4,6 +4,7 @@
   "jsonFile": "./tmpy/data_json.txt",
   "db": "mongodb://localhost/rssDB",
   "PORT": "3000",
+  "jwtPrivateKey": "Maciej",
 
   "inText": "./tmpy/in.txt",
   "outText": "./tmpy/out.txt"
