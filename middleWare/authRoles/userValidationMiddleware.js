@@ -28,7 +28,10 @@ function validate(value) {
       .required()
       .email(),
     password: new PasswordComplexity(complexityOptions),
-    isAdmin: Joi.boolean().required()
+    role: Joi.string()
+      .min(2)
+      .max(10)
+      .required()
     // password: Joi.string()
     //   .min(8)
     //   .max(50)

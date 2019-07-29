@@ -1,9 +1,9 @@
-const auth = require("../middleware/authMiddleware");
-const admin = require("../middleware/adminMiddleware");
-const validation = require("../middleware/userValidationMiddleware");
-const password = require("../middleware/passwordHashingMiddleware");
+const auth = require("../middleWare/authRoles/authMiddleware");
+const admin = require("../middleWare/authRoles/adminMiddleware");
+const validation = require("../middleWare/authRoles/userValidationMiddleware");
+const password = require("../middleware/authRoles/passwordHashingMiddleware");
 const _ = require("lodash");
-const { Users } = require("../models/usersModel");
+const { Users } = require("../models/userModel");
 const express = require("express");
 const router = express.Router();
 

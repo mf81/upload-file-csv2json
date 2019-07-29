@@ -1,7 +1,7 @@
 const validate = require("express-validation");
 const upload = require("../validation/validationUpload");
-const push = require("../middleWare/uploadMiddleware");
-const get = require("../middleWare/getJsonMiddleware");
+const push = require("../middleWare/json/uploadMiddleware");
+const get = require("../middleWare/json/getJsonMiddleware");
 const fs = require("fs");
 const { Rss, validateRss } = require("../models/rssModel");
 const config = require("config");
