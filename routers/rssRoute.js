@@ -6,9 +6,9 @@ const validateObjectId = require("../middleware/validateObjectId");
 const router = express.Router();
 const auth = require("../middleWare/authRoles/authMiddleware");
 const roUser = require("../middleWare/authRoles/roUserMiddleware");
-const moderator = require("../middleWare/authRoles/roUserMiddleware");
+const moderator = require("../middleWare/authRoles/moderatorMiddleware");
 
-router.get("/", [auth, roUser], async (req, res) => {
+router.get("/", [auth, moderator], async (req, res) => {
   const rss = await Rss.find();
   res.send(rss);
 });
