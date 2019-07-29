@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const PasswordComplexity = require("joi-password-complexity");
 
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   next();

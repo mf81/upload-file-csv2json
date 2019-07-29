@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 
-module.exports = async function(req, res, next) {
+module.exports = async (req, res, next) => {
   try {
     const { password } = req.body;
     const salt = await bcrypt.genSalt(10);

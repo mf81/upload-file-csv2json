@@ -1,7 +1,7 @@
 const loggerWinston = require("../startup/winston");
 const ev = require("express-validation");
 
-module.exports = function(err, req, res, next) {
+module.exports = (err, req, res, next) => {
   loggerWinston().error(err.message);
 
   if (err instanceof ev.ValidationError)

@@ -1,4 +1,4 @@
-module.exports = function(req, res, next) {
+module.exports = (req, res, next) => {
   const { role } = req.user;
 
   if (role === "admin" || role === "moderator" || role === "ro") {
