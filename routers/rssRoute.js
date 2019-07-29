@@ -4,19 +4,22 @@ const config = require("config");
 const express = require("express");
 const validateObjectId = require("../middleware/validateObjectId");
 const router = express.Router();
+const auth = require("../middleWare/authRoles/authMiddleware");
+const roUser = require("../middleWare/authRoles/roUserMiddleware");
+const moderator = require("../middleWare/authRoles/roUserMiddleware");
 
-router.get("/", async (req, res) => {
+router.get("/", [auth, roUser], async (req, res) => {
   const rss = await Rss.find();
   res.send(rss);
 });
 
-router.get("/id/:id", validateObjectId, async (req, res) => {
+router.get("/id/:id", [auth, roUser, validateObjectId], async (req, res) => {
   const rss = await Rss.findById(req.params.id);
   if (!rss) return res.status(404).send("No ID find");
   res.send(rss);
 });
 
-router.get("/findby", async (req, res) => {
+router.get("/findby", [auth, roUser], async (req, res) => {
   rss = await Rss.find({
     $and: [
       {
@@ -31,7 +34,7 @@ router.get("/findby", async (req, res) => {
   res.send(rss);
 });
 
-router.get("/findbyjson", async (req, res) => {
+router.get("/findbyjson", [auth, roUser], async (req, res) => {
   // await Rss.find(docRecords(req.body), (err, doc) => {
   //   const txt = doc.wartosc;
   //   doc.wartosc = txt.replace(".", "");
